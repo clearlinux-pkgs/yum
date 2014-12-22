@@ -1,0 +1,23 @@
+# No sysvinit
+rm -rf %{buildroot}%{_sysconfdir}/rc.d
+
+# Stateless dbus
+mkdir -p %{buildroot}%{_datadir}/dbus-1/system.d
+mv %{buildroot}%{_sysconfdir}/dbus-1/system.d/yum-updatesd.conf %{buildroot}%{_datadir}/dbus-1/system.d
+rm -rf %{buildroot}%{_sysconfdir}/dbus-1/
+
+# No cron
+rm -rf %{buildroot}%{_sysconfdir}/cron.daily
+rm -rf %{buildroot}%{_sysconfdir}/sysconfig
+
+# No logrotate
+rm -rf %{buildroot}%{_sysconfdir}/logrotate.d
+
+# Stateless bash-completion
+mkdir -p %{buildroot}%{_datadir}/bash-completion/completions/
+mv %{buildroot}%{_sysconfdir}/bash_completion.d/yum.bash %{buildroot}%{_datadir}/bash-completion/completions/yum
+rm -rf %{buildroot}%{_sysconfdir}/bash_completion.d
+
+# No need for pointless yum config, it's only a foreign package
+# manager for build environments
+rm -rf %{buildroot}%{_sysconfdir}/yum
