@@ -4,7 +4,7 @@
 #
 Name     : yum
 Version  : 3.4.3
-Release  : 17
+Release  : 18
 URL      : http://yum.baseurl.org/download/3.4/yum-3.4.3.tar.gz
 Source0  : http://yum.baseurl.org/download/3.4/yum-3.4.3.tar.gz
 Summary  : RPM installer/updater
@@ -16,7 +16,9 @@ Requires: yum-data
 Requires: yum-locales
 Requires: yum-doc
 BuildRequires : gettext-bin
+BuildRequires : intltool
 Patch1: cve-2014-0022.nopatch
+Patch2: nolock.patch
 
 %description
 Yum is a utility that can check for and automatically download and
@@ -66,6 +68,7 @@ python components for the yum package.
 
 %prep
 %setup -q -n yum-3.4.3
+%patch2 -p1
 
 %build
 make V=1  %{?_smp_mflags} DESTDIR=%{buildroot}

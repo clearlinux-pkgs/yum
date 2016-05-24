@@ -1,0 +1,11 @@
+--- yum-3.4.3/yum/__init__.py~	2011-06-28 20:27:22.000000000 +0000
++++ yum-3.4.3/yum/__init__.py	2016-05-24 14:38:53.590594992 +0000
+@@ -1758,7 +1758,7 @@
+         
+     def doLock(self, lockfile = YUM_PID_FILE):
+         """perform the yum locking, raise yum-based exceptions, not OSErrors"""
+-        
++        return
+         if self.conf.uid != 0:
+             #  If we are a user, assume we are using the root cache ... so don't
+             # bother locking.
