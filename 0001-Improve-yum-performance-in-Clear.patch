@@ -1,0 +1,29 @@
+From 0dc736687f2d9041aebe600c89ea53564327ce93 Mon Sep 17 00:00:00 2001
+From: William Douglas <william.douglas@intel.com>
+Date: Thu, 27 Apr 2017 23:47:58 +0000
+Subject: [PATCH] Improve yum performance in Clear
+
+Clear Linux uses yum to do dependency management with the repository's
+rpm files. Through that lens, yum database corruption is not import as
+the database files are impermanent anyway and speed is the major
+priority. To make this trade off turn off the synchronous pragma when
+opening a sqlite db.
+---
+ yum/history.py | 1 +
+ 1 file changed, 1 insertion(+)
+
+diff --git a/yum/history.py b/yum/history.py
+index 5385bd1..35d5a0f 100644
+--- a/yum/history.py
++++ b/yum/history.py
+@@ -634,6 +634,7 @@ class YumHistory:
+             #  In theory this sucks, as history could be shared. In reality
+             # it's deep yum stuff and there should only be one yum.
+             executeSQL(self._conn.cursor(), "PRAGMA locking_mode = EXCLUSIVE")
++            executeSQL(self._conn.cursor(), "PRAGMA synchronous = OFF")
+ 
+         return self._conn.cursor()
+     def _commit(self):
+-- 
+2.12.2
+

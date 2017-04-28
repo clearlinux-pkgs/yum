@@ -4,7 +4,7 @@
 #
 Name     : yum
 Version  : 3.4.3
-Release  : 20
+Release  : 21
 URL      : http://yum.baseurl.org/download/3.4/yum-3.4.3.tar.gz
 Source0  : http://yum.baseurl.org/download/3.4/yum-3.4.3.tar.gz
 Summary  : RPM installer/updater
@@ -17,8 +17,10 @@ Requires: yum-locales
 Requires: yum-doc
 BuildRequires : gettext-bin
 BuildRequires : intltool
+BuildRequires : python-dev
 Patch1: cve-2014-0022.nopatch
 Patch2: nolock.patch
+Patch3: 0001-Improve-yum-performance-in-Clear.patch
 
 %description
 Yum is a utility that can check for and automatically download and
@@ -69,11 +71,22 @@ python components for the yum package.
 %prep
 %setup -q -n yum-3.4.3
 %patch2 -p1
+%patch3 -p1
 
 %build
+export http_proxy=http://127.0.0.1:9/
+export https_proxy=http://127.0.0.1:9/
+export no_proxy=localhost,127.0.0.1,0.0.0.0
+export LANG=C
+export SOURCE_DATE_EPOCH=1493338265
+export CFLAGS="$CFLAGS -fstack-protector-strong "
+export FCFLAGS="$CFLAGS -fstack-protector-strong "
+export FFLAGS="$CFLAGS -fstack-protector-strong "
+export CXXFLAGS="$CXXFLAGS -fstack-protector-strong "
 make V=1  %{?_smp_mflags} DESTDIR=%{buildroot}
 
 %install
+export SOURCE_DATE_EPOCH=1493338265
 rm -rf %{buildroot}
 %make_install
 %find_lang yum
@@ -135,8 +148,8 @@ rm -rf %{buildroot}%{_sysconfdir}/yum
 
 %files python
 %defattr(-,root,root,-)
-/usr/lib/python*/*
+/usr/lib/python2*/*
 
-%files locales -f yum.lang 
+%files locales -f yum.lang
 %defattr(-,root,root,-)
 
