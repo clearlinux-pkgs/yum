@@ -4,14 +4,14 @@
 #
 Name     : yum
 Version  : 3.4.3
-Release  : 22
+Release  : 23
 URL      : http://yum.baseurl.org/download/3.4/yum-3.4.3.tar.gz
 Source0  : http://yum.baseurl.org/download/3.4/yum-3.4.3.tar.gz
 Summary  : RPM installer/updater
 Group    : Development/Tools
 License  : GPL-2.0 GPL-2.0+
 Requires: yum-bin
-Requires: yum-python
+Requires: yum-legacypython
 Requires: yum-data
 Requires: yum-locales
 Requires: yum-doc
@@ -52,20 +52,20 @@ Group: Documentation
 doc components for the yum package.
 
 
+%package legacypython
+Summary: legacypython components for the yum package.
+Group: Default
+
+%description legacypython
+legacypython components for the yum package.
+
+
 %package locales
 Summary: locales components for the yum package.
 Group: Default
 
 %description locales
 locales components for the yum package.
-
-
-%package python
-Summary: python components for the yum package.
-Group: Default
-
-%description python
-python components for the yum package.
 
 
 %prep
@@ -78,7 +78,7 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C
-export SOURCE_DATE_EPOCH=1493338265
+export SOURCE_DATE_EPOCH=1505074344
 export CFLAGS="$CFLAGS -fstack-protector-strong "
 export FCFLAGS="$CFLAGS -fstack-protector-strong "
 export FFLAGS="$CFLAGS -fstack-protector-strong "
@@ -86,7 +86,7 @@ export CXXFLAGS="$CXXFLAGS -fstack-protector-strong "
 make V=1  %{?_smp_mflags} DESTDIR=%{buildroot}
 
 %install
-export SOURCE_DATE_EPOCH=1493338265
+export SOURCE_DATE_EPOCH=1505074344
 rm -rf %{buildroot}
 %make_install
 %find_lang yum
@@ -146,7 +146,7 @@ rm -rf %{buildroot}%{_sysconfdir}/yum
 %doc /usr/share/man/man5/*
 %doc /usr/share/man/man8/*
 
-%files python
+%files legacypython
 %defattr(-,root,root,-)
 /usr/lib/python2*/*
 
