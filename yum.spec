@@ -4,7 +4,7 @@
 #
 Name     : yum
 Version  : 3.4.3
-Release  : 23
+Release  : 24
 URL      : http://yum.baseurl.org/download/3.4/yum-3.4.3.tar.gz
 Source0  : http://yum.baseurl.org/download/3.4/yum-3.4.3.tar.gz
 Summary  : RPM installer/updater
@@ -15,6 +15,7 @@ Requires: yum-legacypython
 Requires: yum-data
 Requires: yum-locales
 Requires: yum-doc
+Requires: yum-python
 BuildRequires : gettext-bin
 BuildRequires : intltool
 BuildRequires : python-dev
@@ -55,6 +56,7 @@ doc components for the yum package.
 %package legacypython
 Summary: legacypython components for the yum package.
 Group: Default
+Requires: python-core
 
 %description legacypython
 legacypython components for the yum package.
@@ -68,6 +70,15 @@ Group: Default
 locales components for the yum package.
 
 
+%package python
+Summary: python components for the yum package.
+Group: Default
+Requires: yum-legacypython
+
+%description python
+python components for the yum package.
+
+
 %prep
 %setup -q -n yum-3.4.3
 %patch2 -p1
@@ -78,7 +89,7 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C
-export SOURCE_DATE_EPOCH=1505074344
+export SOURCE_DATE_EPOCH=1509404000
 export CFLAGS="$CFLAGS -fstack-protector-strong "
 export FCFLAGS="$CFLAGS -fstack-protector-strong "
 export FFLAGS="$CFLAGS -fstack-protector-strong "
@@ -86,7 +97,7 @@ export CXXFLAGS="$CXXFLAGS -fstack-protector-strong "
 make V=1  %{?_smp_mflags} DESTDIR=%{buildroot}
 
 %install
-export SOURCE_DATE_EPOCH=1505074344
+export SOURCE_DATE_EPOCH=1509404000
 rm -rf %{buildroot}
 %make_install
 %find_lang yum
@@ -118,28 +129,20 @@ rm -rf %{buildroot}%{_sysconfdir}/yum
 /usr/share/dbus-1/system.d/yum-updatesd.conf
 /usr/share/yum-cli/callback.py
 /usr/share/yum-cli/callback.pyc
-/usr/share/yum-cli/callback.pyo
 /usr/share/yum-cli/cli.py
 /usr/share/yum-cli/cli.pyc
-/usr/share/yum-cli/cli.pyo
 /usr/share/yum-cli/output.py
 /usr/share/yum-cli/output.pyc
-/usr/share/yum-cli/output.pyo
 /usr/share/yum-cli/shell.py
 /usr/share/yum-cli/shell.pyc
-/usr/share/yum-cli/shell.pyo
 /usr/share/yum-cli/utils.py
 /usr/share/yum-cli/utils.pyc
-/usr/share/yum-cli/utils.pyo
 /usr/share/yum-cli/yumcommands.py
 /usr/share/yum-cli/yumcommands.pyc
-/usr/share/yum-cli/yumcommands.pyo
 /usr/share/yum-cli/yummain.py
 /usr/share/yum-cli/yummain.pyc
-/usr/share/yum-cli/yummain.pyo
 /usr/share/yum-cli/yumupd.py
 /usr/share/yum-cli/yumupd.pyc
-/usr/share/yum-cli/yumupd.pyo
 
 %files doc
 %defattr(-,root,root,-)
@@ -149,6 +152,9 @@ rm -rf %{buildroot}%{_sysconfdir}/yum
 %files legacypython
 %defattr(-,root,root,-)
 /usr/lib/python2*/*
+
+%files python
+%defattr(-,root,root,-)
 
 %files locales -f yum.lang
 %defattr(-,root,root,-)
