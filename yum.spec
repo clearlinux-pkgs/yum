@@ -4,7 +4,7 @@
 #
 Name     : yum
 Version  : 3.4.3
-Release  : 26
+Release  : 27
 URL      : http://yum.baseurl.org/download/3.4/yum-3.4.3.tar.gz
 Source0  : http://yum.baseurl.org/download/3.4/yum-3.4.3.tar.gz
 Summary  : RPM installer/updater
