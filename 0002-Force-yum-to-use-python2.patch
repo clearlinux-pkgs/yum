@@ -1,0 +1,550 @@
+From 1e707a611f3ea9edf8d3ece311c937ec56ce6918 Mon Sep 17 00:00:00 2001
+From: William Douglas <william.douglas@intel.com>
+Date: Fri, 2 Feb 2018 01:19:03 +0000
+Subject: [PATCH] Force yum to use python2
+
+---
+ bin/yum-updatesd.py     | 2 +-
+ bin/yum.py              | 2 +-
+ callback.py             | 2 +-
+ cli.py                  | 2 +-
+ output.py               | 2 +-
+ po/pygettext.py         | 2 +-
+ rpmUtils/__init__.py    | 2 +-
+ rpmUtils/arch.py        | 2 +-
+ rpmUtils/miscutils.py   | 2 +-
+ rpmUtils/oldUtils.py    | 2 +-
+ rpmUtils/transaction.py | 2 +-
+ rpmUtils/updates.py     | 2 +-
+ shell.py                | 2 +-
+ test/check-po-yes-no.py | 2 +-
+ test/rpmdb-cache.py     | 2 +-
+ test/yum-leak-test.py   | 2 +-
+ utils.py                | 2 +-
+ yum-updatesd.py         | 2 +-
+ yum/Errors.py           | 2 +-
+ yum/__init__.py         | 2 +-
+ yum/callbacks.py        | 2 +-
+ yum/comps.py            | 2 +-
+ yum/config.py           | 2 +-
+ yum/constants.py        | 2 +-
+ yum/depsolve.py         | 2 +-
+ yum/failover.py         | 2 +-
+ yum/history.py          | 2 +-
+ yum/i18n.py             | 2 +-
+ yum/logginglevels.py    | 2 +-
+ yum/mdparser.py         | 2 +-
+ yum/metalink.py         | 2 +-
+ yum/misc.py             | 2 +-
+ yum/packageSack.py      | 2 +-
+ yum/packages.py         | 2 +-
+ yum/parser.py           | 2 +-
+ yum/pgpmsg.py           | 2 +-
+ yum/pkgtag_db.py        | 2 +-
+ yum/plugins.py          | 2 +-
+ yum/repoMDObject.py     | 2 +-
+ yum/repos.py            | 2 +-
+ yum/rpmsack.py          | 2 +-
+ yum/rpmtrans.py         | 2 +-
+ yum/sqlitesack.py       | 2 +-
+ yum/sqlutils.py         | 2 +-
+ yum/transactioninfo.py  | 2 +-
+ yum/update_md.py        | 2 +-
+ yum/yumRepo.py          | 2 +-
+ yumcommands.py          | 2 +-
+ yummain.py              | 2 +-
+ 49 files changed, 49 insertions(+), 49 deletions(-)
+
+diff --git a/bin/yum-updatesd.py b/bin/yum-updatesd.py
+index 131c182..b829e24 100755
+--- a/bin/yum-updatesd.py
++++ b/bin/yum-updatesd.py
+@@ -1,4 +1,4 @@
+-#!/usr/bin/python
++#!/usr/bin/python2
+ import sys, os
+ import optparse
+ 
+diff --git a/bin/yum.py b/bin/yum.py
+index 7ccee31..64bed67 100755
+--- a/bin/yum.py
++++ b/bin/yum.py
+@@ -1,4 +1,4 @@
+-#!/usr/bin/python
++#!/usr/bin/python2
+ import sys
+ try:
+     import yum
+diff --git a/callback.py b/callback.py
+index 2f6154e..5facfcd 100644
+--- a/callback.py
++++ b/callback.py
+@@ -1,4 +1,4 @@
+-#!/usr/bin/python -t
++#!/usr/bin/python2 -t
+ # This program is free software; you can redistribute it and/or modify
+ # it under the terms of the GNU General Public License as published by
+ # the Free Software Foundation; either version 2 of the License, or
+diff --git a/cli.py b/cli.py
+index 6056d38..ac32b0d 100644
+--- a/cli.py
++++ b/cli.py
+@@ -1,4 +1,4 @@
+-#!/usr/bin/python -t
++#!/usr/bin/python2 -t
+ # This program is free software; you can redistribute it and/or modify
+ # it under the terms of the GNU General Public License as published by
+ # the Free Software Foundation; either version 2 of the License, or
+diff --git a/output.py b/output.py
+index b6aa277..4928c9b 100755
+--- a/output.py
++++ b/output.py
+@@ -1,4 +1,4 @@
+-#!/usr/bin/python -t
++#!/usr/bin/python2 -t
+ 
+ """This handles actual output from the cli"""
+ 
+diff --git a/po/pygettext.py b/po/pygettext.py
+index 276a433..0edca5d 100644
+--- a/po/pygettext.py
++++ b/po/pygettext.py
+@@ -1,4 +1,4 @@
+-#!/usr/bin/python
++#!/usr/bin/python2
+ # Originally written by Barry Warsaw <bwarsaw@python.org>
+ #
+ # minimally patched to make it even more xgettext compatible 
+diff --git a/rpmUtils/__init__.py b/rpmUtils/__init__.py
+index 3c230db..6f14c91 100644
+--- a/rpmUtils/__init__.py
++++ b/rpmUtils/__init__.py
+@@ -1,4 +1,4 @@
+-#!/usr/bin/python -tt
++#!/usr/bin/python2 -tt
+ 
+ 
+ class RpmUtilsError(Exception):
+diff --git a/rpmUtils/arch.py b/rpmUtils/arch.py
+index 6082005..9124efc 100644
+--- a/rpmUtils/arch.py
++++ b/rpmUtils/arch.py
+@@ -1,4 +1,4 @@
+-#!/usr/bin/python
++#!/usr/bin/python2
+ #
+ 
+ import os
+diff --git a/rpmUtils/miscutils.py b/rpmUtils/miscutils.py
+index aea4550..0ddf64b 100644
+--- a/rpmUtils/miscutils.py
++++ b/rpmUtils/miscutils.py
+@@ -1,4 +1,4 @@
+-#!/usr/bin/python -tt
++#!/usr/bin/python2 -tt
+ 
+ # This program is free software; you can redistribute it and/or modify
+ # it under the terms of the GNU General Public License as published by
+diff --git a/rpmUtils/oldUtils.py b/rpmUtils/oldUtils.py
+index 5f1d9ec..aea3494 100644
+--- a/rpmUtils/oldUtils.py
++++ b/rpmUtils/oldUtils.py
+@@ -1,4 +1,4 @@
+-#!/usr/bin/python -tt
++#!/usr/bin/python2 -tt
+ 
+ import rpm
+ import types
+diff --git a/rpmUtils/transaction.py b/rpmUtils/transaction.py
+index 121ad5b..7a56fe1 100644
+--- a/rpmUtils/transaction.py
++++ b/rpmUtils/transaction.py
+@@ -1,4 +1,4 @@
+-#!/usr/bin/python
++#!/usr/bin/python2
+ 
+ #
+ # Client code for Update Agent
+diff --git a/rpmUtils/updates.py b/rpmUtils/updates.py
+index 012d00d..5764513 100644
+--- a/rpmUtils/updates.py
++++ b/rpmUtils/updates.py
+@@ -1,4 +1,4 @@
+-#!/usr/bin/python -tt
++#!/usr/bin/python2 -tt
+ # This program is free software; you can redistribute it and/or modify
+ # it under the terms of the GNU General Public License as published by
+ # the Free Software Foundation; either version 2 of the License, or
+diff --git a/shell.py b/shell.py
+index 999bffc..808dd41 100644
+--- a/shell.py
++++ b/shell.py
+@@ -1,4 +1,4 @@
+-#! /usr/bin/python -tt
++#! /usr/bin/python2 -tt
+ # This program is free software; you can redistribute it and/or modify
+ # it under the terms of the GNU General Public License as published by
+ # the Free Software Foundation; either version 2 of the License, or
+diff --git a/test/check-po-yes-no.py b/test/check-po-yes-no.py
+index e22318e..6b467a5 100755
+--- a/test/check-po-yes-no.py
++++ b/test/check-po-yes-no.py
+@@ -1,4 +1,4 @@
+-#! /usr/bin/python -tt
++#! /usr/bin/python2 -tt
+ 
+ # This is a simple command to check that "Is this ok [y/N]: " and yes and no
+ # have either all been translated or none have been translated.
+diff --git a/test/rpmdb-cache.py b/test/rpmdb-cache.py
+index 7768a93..549c7d1 100755
+--- a/test/rpmdb-cache.py
++++ b/test/rpmdb-cache.py
+@@ -1,4 +1,4 @@
+-#! /usr/bin/python -tt
++#! /usr/bin/python2 -tt
+ 
+ import sys
+ import yum
+diff --git a/test/yum-leak-test.py b/test/yum-leak-test.py
+index 760b770..e24ae65 100755
+--- a/test/yum-leak-test.py
++++ b/test/yum-leak-test.py
+@@ -1,4 +1,4 @@
+-#! /usr/bin/python -tt
++#! /usr/bin/python2 -tt
+ 
+ # Do either:
+ # ./yum-leak-test.py
+diff --git a/utils.py b/utils.py
+index ced6ba0..29d3ba9 100644
+--- a/utils.py
++++ b/utils.py
+@@ -1,4 +1,4 @@
+-#!/usr/bin/python -t
++#!/usr/bin/python2 -t
+ # This program is free software; you can redistribute it and/or modify
+ # it under the terms of the GNU General Public License as published by
+ # the Free Software Foundation; either version 2 of the License, or
+diff --git a/yum-updatesd.py b/yum-updatesd.py
+index 1ce4720..44de522 100644
+--- a/yum-updatesd.py
++++ b/yum-updatesd.py
+@@ -1,4 +1,4 @@
+-#!/usr/bin/python -tt
++#!/usr/bin/python2 -tt
+ # This program is free software; you can redistribute it and/or modify
+ # it under the terms of the GNU General Public License as published by
+ # the Free Software Foundation; either version 2 of the License, or
+diff --git a/yum/Errors.py b/yum/Errors.py
+index c1af4ad..9c0fad6 100644
+--- a/yum/Errors.py
++++ b/yum/Errors.py
+@@ -1,4 +1,4 @@
+-#!/usr/bin/python -tt
++#!/usr/bin/python2 -tt
+ # This program is free software; you can redistribute it and/or modify
+ # it under the terms of the GNU General Public License as published by
+ # the Free Software Foundation; either version 2 of the License, or
+diff --git a/yum/__init__.py b/yum/__init__.py
+index 99039e0..6ed8f27 100644
+--- a/yum/__init__.py
++++ b/yum/__init__.py
+@@ -1,4 +1,4 @@
+-#!/usr/bin/python -tt
++#!/usr/bin/python2 -tt
+ # This program is free software; you can redistribute it and/or modify
+ # it under the terms of the GNU General Public License as published by
+ # the Free Software Foundation; either version 2 of the License, or
+diff --git a/yum/callbacks.py b/yum/callbacks.py
+index 7ad25ce..2669b81 100644
+--- a/yum/callbacks.py
++++ b/yum/callbacks.py
+@@ -1,4 +1,4 @@
+-#!/usr/bin/python -tt
++#!/usr/bin/python2 -tt
+ # This program is free software; you can redistribute it and/or modify
+ # it under the terms of the GNU General Public License as published by
+ # the Free Software Foundation; either version 2 of the License, or
+diff --git a/yum/comps.py b/yum/comps.py
+index 65f6d5e..2ebd6b7 100755
+--- a/yum/comps.py
++++ b/yum/comps.py
+@@ -1,4 +1,4 @@
+-#! /usr/bin/python -tt
++#! /usr/bin/python2 -tt
+ # This program is free software; you can redistribute it and/or modify
+ # it under the terms of the GNU General Public License as published by
+ # the Free Software Foundation; either version 2 of the License, or
+diff --git a/yum/config.py b/yum/config.py
+index d09511f..8839ad8 100644
+--- a/yum/config.py
++++ b/yum/config.py
+@@ -1,4 +1,4 @@
+-#!/usr/bin/python -t
++#!/usr/bin/python2 -t
+ 
+ # This program is free software; you can redistribute it and/or modify
+ # it under the terms of the GNU General Public License as published by
+diff --git a/yum/constants.py b/yum/constants.py
+index 5deed10..71f4fd1 100644
+--- a/yum/constants.py
++++ b/yum/constants.py
+@@ -1,4 +1,4 @@
+-#! /usr/bin/python -tt
++#! /usr/bin/python2 -tt
+ # This program is free software; you can redistribute it and/or modify
+ # it under the terms of the GNU General Public License as published by
+ # the Free Software Foundation; either version 2 of the License, or
+diff --git a/yum/depsolve.py b/yum/depsolve.py
+index 6d744c0..99d4d66 100644
+--- a/yum/depsolve.py
++++ b/yum/depsolve.py
+@@ -1,4 +1,4 @@
+-#!/usr/bin/python -t
++#!/usr/bin/python2 -t
+ # This program is free software; you can redistribute it and/or modify
+ # it under the terms of the GNU General Public License as published by
+ # the Free Software Foundation; either version 2 of the License, or
+diff --git a/yum/failover.py b/yum/failover.py
+index bca9651..a5d67fa 100644
+--- a/yum/failover.py
++++ b/yum/failover.py
+@@ -1,4 +1,4 @@
+-#!/usr/bin/python
++#!/usr/bin/python2
+ # This program is free software; you can redistribute it and/or modify
+ # it under the terms of the GNU General Public License as published by
+ # the Free Software Foundation; either version 2 of the License, or
+diff --git a/yum/history.py b/yum/history.py
+index 35d5a0f..cacf198 100644
+--- a/yum/history.py
++++ b/yum/history.py
+@@ -1,4 +1,4 @@
+-#!/usr/bin/python -t
++#!/usr/bin/python2 -t
+ # This program is free software; you can redistribute it and/or modify
+ # it under the terms of the GNU General Public License as published by
+ # the Free Software Foundation; either version 2 of the License, or
+diff --git a/yum/i18n.py b/yum/i18n.py
+index 9889bf6..395e0b8 100755
+--- a/yum/i18n.py
++++ b/yum/i18n.py
+@@ -1,4 +1,4 @@
+-#!/usr/bin/python -tt
++#!/usr/bin/python2 -tt
+ # This program is free software; you can redistribute it and/or modify
+ # it under the terms of the GNU General Public License as published by
+ # the Free Software Foundation; either version 2 of the License, or
+diff --git a/yum/logginglevels.py b/yum/logginglevels.py
+index 14c5e73..dffb75a 100644
+--- a/yum/logginglevels.py
++++ b/yum/logginglevels.py
+@@ -1,4 +1,4 @@
+-#! /usr/bin/python -tt
++#! /usr/bin/python2 -tt
+ # This program is free software; you can redistribute it and/or modify
+ # it under the terms of the GNU General Public License as published by
+ # the Free Software Foundation; either version 2 of the License, or
+diff --git a/yum/mdparser.py b/yum/mdparser.py
+index 8631f06..efb0ac1 100644
+--- a/yum/mdparser.py
++++ b/yum/mdparser.py
+@@ -1,4 +1,4 @@
+-#! /usr/bin/python -tt
++#! /usr/bin/python2 -tt
+ 
+ # This program is free software; you can redistribute it and/or modify
+ # it under the terms of the GNU General Public License as published by
+diff --git a/yum/metalink.py b/yum/metalink.py
+index aaa4f25..d3f4d5b 100755
+--- a/yum/metalink.py
++++ b/yum/metalink.py
+@@ -1,4 +1,4 @@
+-#!/usr/bin/python -t
++#!/usr/bin/python2 -t
+ # This program is free software; you can redistribute it and/or modify
+ # it under the terms of the GNU General Public License as published by
+ # the Free Software Foundation; either version 2 of the License, or
+diff --git a/yum/misc.py b/yum/misc.py
+index 2f6ddfe..56dccca 100644
+--- a/yum/misc.py
++++ b/yum/misc.py
+@@ -1,4 +1,4 @@
+-#! /usr/bin/python -tt
++#! /usr/bin/python2 -tt
+ """
+ Assorted utility functions for yum.
+ """
+diff --git a/yum/packageSack.py b/yum/packageSack.py
+index 4af563a..d025c16 100644
+--- a/yum/packageSack.py
++++ b/yum/packageSack.py
+@@ -1,4 +1,4 @@
+-#!/usr/bin/python -tt
++#!/usr/bin/python2 -tt
+ # This program is free software; you can redistribute it and/or modify
+ # it under the terms of the GNU General Public License as published by
+ # the Free Software Foundation; either version 2 of the License, or
+diff --git a/yum/packages.py b/yum/packages.py
+index 5ef9951..6b7576b 100644
+--- a/yum/packages.py
++++ b/yum/packages.py
+@@ -1,4 +1,4 @@
+-#!/usr/bin/python -tt
++#!/usr/bin/python2 -tt
+ # This program is free software; you can redistribute it and/or modify
+ # it under the terms of the GNU General Public License as published by
+ # the Free Software Foundation; either version 2 of the License, or
+diff --git a/yum/parser.py b/yum/parser.py
+index fccf528..1017741 100644
+--- a/yum/parser.py
++++ b/yum/parser.py
+@@ -1,4 +1,4 @@
+-#! /usr/bin/python -tt
++#! /usr/bin/python2 -tt
+ import re
+ import urlparse
+ import urlgrabber
+diff --git a/yum/pgpmsg.py b/yum/pgpmsg.py
+index ee825c6..253fde3 100644
+--- a/yum/pgpmsg.py
++++ b/yum/pgpmsg.py
+@@ -1,4 +1,4 @@
+-#! /usr/bin/python -tt
++#! /usr/bin/python2 -tt
+ ##Copyright (C) 2003,2005,2009  Jens B. Jorgensen <jbj1@ultraemail.net>
+ ##
+ ##This program is free software; you can redistribute it and/or
+diff --git a/yum/pkgtag_db.py b/yum/pkgtag_db.py
+index afcc28d..39ac59b 100644
+--- a/yum/pkgtag_db.py
++++ b/yum/pkgtag_db.py
+@@ -1,4 +1,4 @@
+-#!/usr/bin/python -tt
++#!/usr/bin/python2 -tt
+ # This program is free software; you can redistribute it and/or modify
+ # it under the terms of the GNU General Public License as published by
+ # the Free Software Foundation; either version 2 of the License, or
+diff --git a/yum/plugins.py b/yum/plugins.py
+index bfc49b7..6f30027 100644
+--- a/yum/plugins.py
++++ b/yum/plugins.py
+@@ -1,4 +1,4 @@
+-#! /usr/bin/python -tt
++#! /usr/bin/python2 -tt
+ # This program is free software; you can redistribute it and/or modify
+ # it under the terms of the GNU General Public License as published by
+ # the Free Software Foundation; either version 2 of the License, or
+diff --git a/yum/repoMDObject.py b/yum/repoMDObject.py
+index 31b1080..6fe73ca 100755
+--- a/yum/repoMDObject.py
++++ b/yum/repoMDObject.py
+@@ -1,4 +1,4 @@
+-#!/usr/bin/python -tt
++#!/usr/bin/python2 -tt
+ # This program is free software; you can redistribute it and/or modify
+ # it under the terms of the GNU General Public License as published by
+ # the Free Software Foundation; either version 2 of the License, or
+diff --git a/yum/repos.py b/yum/repos.py
+index 3793bad..58a96ba 100644
+--- a/yum/repos.py
++++ b/yum/repos.py
+@@ -1,4 +1,4 @@
+-#!/usr/bin/python -tt
++#!/usr/bin/python2 -tt
+ # This program is free software; you can redistribute it and/or modify
+ # it under the terms of the GNU General Public License as published by
+ # the Free Software Foundation; either version 2 of the License, or
+diff --git a/yum/rpmsack.py b/yum/rpmsack.py
+index e289a7a..774ac0d 100644
+--- a/yum/rpmsack.py
++++ b/yum/rpmsack.py
+@@ -1,4 +1,4 @@
+-#!/usr/bin/python -tt
++#!/usr/bin/python2 -tt
+ # This program is free software; you can redistribute it and/or modify
+ # it under the terms of the GNU General Public License as published by
+ # the Free Software Foundation; either version 2 of the License, or
+diff --git a/yum/rpmtrans.py b/yum/rpmtrans.py
+index 9b265f9..04c3591 100644
+--- a/yum/rpmtrans.py
++++ b/yum/rpmtrans.py
+@@ -1,4 +1,4 @@
+-#!/usr/bin/python -t
++#!/usr/bin/python2 -t
+ # This program is free software; you can redistribute it and/or modify
+ # it under the terms of the GNU General Public License as published by
+ # the Free Software Foundation; either version 2 of the License, or
+diff --git a/yum/sqlitesack.py b/yum/sqlitesack.py
+index 8a6f6f3..5a93270 100644
+--- a/yum/sqlitesack.py
++++ b/yum/sqlitesack.py
+@@ -1,4 +1,4 @@
+-#!/usr/bin/python -tt
++#!/usr/bin/python2 -tt
+ 
+ # This program is free software; you can redistribute it and/or modify
+ # it under the terms of the GNU General Public License as published by
+diff --git a/yum/sqlutils.py b/yum/sqlutils.py
+index 4d7e36e..7423c2d 100644
+--- a/yum/sqlutils.py
++++ b/yum/sqlutils.py
+@@ -1,4 +1,4 @@
+-#!/usr/bin/python -tt
++#!/usr/bin/python2 -tt
+ # This program is free software; you can redistribute it and/or modify
+ # it under the terms of version 2 of the GNU General Public License
+ # as published by the Free Software Foundation
+diff --git a/yum/transactioninfo.py b/yum/transactioninfo.py
+index 4d89d83..a6fe8de 100644
+--- a/yum/transactioninfo.py
++++ b/yum/transactioninfo.py
+@@ -1,4 +1,4 @@
+-#! /usr/bin/python -tt
++#! /usr/bin/python2 -tt
+ # This program is free software; you can redistribute it and/or modify
+ # it under the terms of the GNU General Public License as published by
+ # the Free Software Foundation; either version 2 of the License, or
+diff --git a/yum/update_md.py b/yum/update_md.py
+index 2cb1acb..fba4487 100644
+--- a/yum/update_md.py
++++ b/yum/update_md.py
+@@ -1,4 +1,4 @@
+-#!/usr/bin/python -t
++#!/usr/bin/python2 -t
+ # This program is free software; you can redistribute it and/or modify
+ # it under the terms of the GNU General Public License as published by
+ # the Free Software Foundation; either version 2 of the License, or
+diff --git a/yum/yumRepo.py b/yum/yumRepo.py
+index e5e9ece..2983a7f 100644
+--- a/yum/yumRepo.py
++++ b/yum/yumRepo.py
+@@ -1,4 +1,4 @@
+-#! /usr/bin/python -tt
++#! /usr/bin/python2 -tt
+ # This program is free software; you can redistribute it and/or modify
+ # it under the terms of the GNU General Public License as published by
+ # the Free Software Foundation; either version 2 of the License, or
+diff --git a/yumcommands.py b/yumcommands.py
+index 4dcbea7..3954490 100644
+--- a/yumcommands.py
++++ b/yumcommands.py
+@@ -1,4 +1,4 @@
+-#!/usr/bin/python -t
++#!/usr/bin/python2 -t
+ # This program is free software; you can redistribute it and/or modify
+ # it under the terms of the GNU General Public License as published by
+ # the Free Software Foundation; either version 2 of the License, or
+diff --git a/yummain.py b/yummain.py
+index 9f79f4f..46936ab 100755
+--- a/yummain.py
++++ b/yummain.py
+@@ -1,4 +1,4 @@
+-#!/usr/bin/python -t
++#!/usr/bin/python2 -t
+ # This program is free software; you can redistribute it and/or modify
+ # it under the terms of the GNU General Public License as published by
+ # the Free Software Foundation; either version 2 of the License, or
+-- 
+2.16.1
+

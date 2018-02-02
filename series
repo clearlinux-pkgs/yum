@@ -1,3 +1,4 @@
 cve-2014-0022.nopatch
 nolock.patch
 0001-Improve-yum-performance-in-Clear.patch
+0002-Force-yum-to-use-python2.patch
