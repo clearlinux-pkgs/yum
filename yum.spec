@@ -4,7 +4,7 @@
 #
 Name     : yum
 Version  : 3.4.3
-Release  : 27
+Release  : 28
 URL      : http://yum.baseurl.org/download/3.4/yum-3.4.3.tar.gz
 Source0  : http://yum.baseurl.org/download/3.4/yum-3.4.3.tar.gz
 Summary  : RPM installer/updater
@@ -16,6 +16,7 @@ Requires: yum-data
 Requires: yum-locales
 Requires: yum-doc
 Requires: yum-python
+Requires: pycurl-legacypython
 BuildRequires : gettext-bin
 BuildRequires : intltool
 BuildRequires : python-dev
