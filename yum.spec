@@ -4,7 +4,7 @@
 #
 Name     : yum
 Version  : 3.4.3
-Release  : 29
+Release  : 33
 URL      : http://yum.baseurl.org/download/3.4/yum-3.4.3.tar.gz
 Source0  : http://yum.baseurl.org/download/3.4/yum-3.4.3.tar.gz
 Summary  : RPM installer/updater
@@ -17,13 +17,13 @@ Requires: yum-locales
 Requires: yum-doc
 Requires: yum-python
 Requires: pycurl-legacypython
+Requires: yum-legacypython
 BuildRequires : gettext-bin
 BuildRequires : intltool
 BuildRequires : python-dev
-Patch1: cve-2014-0022.nopatch
-Patch2: nolock.patch
-Patch3: 0001-Improve-yum-performance-in-Clear.patch
-Patch4: 0002-Force-yum-to-use-python2.patch
+Patch1: 0001-Improve-yum-performance-in-Clear.patch
+Patch2: 0002-No-lock.patch
+Patch3: 0003-Force-usr-bin-python2.patch
 
 %description
 Yum is a utility that can check for and automatically download and
@@ -75,7 +75,6 @@ locales components for the yum package.
 %package python
 Summary: python components for the yum package.
 Group: Default
-Requires: yum-legacypython
 
 %description python
 python components for the yum package.
@@ -83,24 +82,24 @@ python components for the yum package.
 
 %prep
 %setup -q -n yum-3.4.3
+%patch1 -p1
 %patch2 -p1
 %patch3 -p1
-%patch4 -p1
 
 %build
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C
-export SOURCE_DATE_EPOCH=1517535189
-export CFLAGS="$CFLAGS -fstack-protector-strong "
-export FCFLAGS="$CFLAGS -fstack-protector-strong "
-export FFLAGS="$CFLAGS -fstack-protector-strong "
-export CXXFLAGS="$CXXFLAGS -fstack-protector-strong "
+export SOURCE_DATE_EPOCH=1526430974
+export CFLAGS="$CFLAGS -fstack-protector-strong -mzero-caller-saved-regs=used "
+export FCFLAGS="$CFLAGS -fstack-protector-strong -mzero-caller-saved-regs=used "
+export FFLAGS="$CFLAGS -fstack-protector-strong -mzero-caller-saved-regs=used "
+export CXXFLAGS="$CXXFLAGS -fstack-protector-strong -mzero-caller-saved-regs=used "
 make  %{?_smp_mflags} DESTDIR=%{buildroot}
 
 %install
-export SOURCE_DATE_EPOCH=1517535189
+export SOURCE_DATE_EPOCH=1526430974
 rm -rf %{buildroot}
 %make_install
 %find_lang yum

@@ -1,15 +1,17 @@
-From 1e707a611f3ea9edf8d3ece311c937ec56ce6918 Mon Sep 17 00:00:00 2001
-From: William Douglas <william.douglas@intel.com>
-Date: Fri, 2 Feb 2018 01:19:03 +0000
-Subject: [PATCH] Force yum to use python2
+From b1562d831dfe953859fa7c9adfa82d70e35f1b8d Mon Sep 17 00:00:00 2001
+From: George T Kramer <george.t.kramer@intel.com>
+Date: Wed, 16 May 2018 00:19:37 +0000
+Subject: [PATCH] Force /usr/bin/python2
 
 ---
+ Makefile                | 2 +-
  bin/yum-updatesd.py     | 2 +-
  bin/yum.py              | 2 +-
  callback.py             | 2 +-
  cli.py                  | 2 +-
  output.py               | 2 +-
  po/pygettext.py         | 2 +-
+ rpmUtils/Makefile       | 2 +-
  rpmUtils/__init__.py    | 2 +-
  rpmUtils/arch.py        | 2 +-
  rpmUtils/miscutils.py   | 2 +-
@@ -23,6 +25,7 @@ Subject: [PATCH] Force yum to use python2
  utils.py                | 2 +-
  yum-updatesd.py         | 2 +-
  yum/Errors.py           | 2 +-
+ yum/Makefile            | 2 +-
  yum/__init__.py         | 2 +-
  yum/callbacks.py        | 2 +-
  yum/comps.py            | 2 +-
@@ -53,8 +56,21 @@ Subject: [PATCH] Force yum to use python2
  yum/yumRepo.py          | 2 +-
  yumcommands.py          | 2 +-
  yummain.py              | 2 +-
- 49 files changed, 49 insertions(+), 49 deletions(-)
+ 52 files changed, 52 insertions(+), 52 deletions(-)
 
+diff --git a/Makefile b/Makefile
+index 740b616..358f1c0 100644
+--- a/Makefile
++++ b/Makefile
+@@ -7,7 +7,7 @@ PKGNAME = yum
+ VERSION=$(shell awk '/Version:/ { print $$2 }' ${PKGNAME}.spec)
+ RELEASE=$(shell awk '/Release:/ { print $$2 }' ${PKGNAME}.spec)
+ CVSTAG=yum-$(subst .,_,$(VERSION)-$(RELEASE))
+-PYTHON=python
++PYTHON=python2
+ WEBHOST = yum.baseurl.org
+ WEB_DOC_PATH = /srv/projects/yum/web/download/docs/yum-api/
+ 
 diff --git a/bin/yum-updatesd.py b/bin/yum-updatesd.py
 index 131c182..b829e24 100755
 --- a/bin/yum-updatesd.py
@@ -115,6 +131,16 @@ index 276a433..0edca5d 100644
  # Originally written by Barry Warsaw <bwarsaw@python.org>
  #
  # minimally patched to make it even more xgettext compatible 
+diff --git a/rpmUtils/Makefile b/rpmUtils/Makefile
+index cd469d2..a53de7c 100644
+--- a/rpmUtils/Makefile
++++ b/rpmUtils/Makefile
+@@ -1,4 +1,4 @@
+-PYTHON=python
++PYTHON=python2
+ PACKAGE = $(shell basename `pwd`)
+ PYFILES = $(wildcard *.py)
+ PYVER := $(shell $(PYTHON) -c 'import sys; print "%.3s" %(sys.version)')
 diff --git a/rpmUtils/__init__.py b/rpmUtils/__init__.py
 index 3c230db..6f14c91 100644
 --- a/rpmUtils/__init__.py
@@ -245,6 +271,16 @@ index c1af4ad..9c0fad6 100644
  # This program is free software; you can redistribute it and/or modify
  # it under the terms of the GNU General Public License as published by
  # the Free Software Foundation; either version 2 of the License, or
+diff --git a/yum/Makefile b/yum/Makefile
+index cd469d2..a53de7c 100644
+--- a/yum/Makefile
++++ b/yum/Makefile
+@@ -1,4 +1,4 @@
+-PYTHON=python
++PYTHON=python2
+ PACKAGE = $(shell basename `pwd`)
+ PYFILES = $(wildcard *.py)
+ PYVER := $(shell $(PYTHON) -c 'import sys; print "%.3s" %(sys.version)')
 diff --git a/yum/__init__.py b/yum/__init__.py
 index 99039e0..6ed8f27 100644
 --- a/yum/__init__.py
@@ -286,7 +322,7 @@ index d09511f..8839ad8 100644
  # This program is free software; you can redistribute it and/or modify
  # it under the terms of the GNU General Public License as published by
 diff --git a/yum/constants.py b/yum/constants.py
-index 5deed10..71f4fd1 100644
+index 5c728d4..f97c749 100644
 --- a/yum/constants.py
 +++ b/yum/constants.py
 @@ -1,4 +1,4 @@
@@ -546,5 +582,5 @@ index 9f79f4f..46936ab 100755
  # it under the terms of the GNU General Public License as published by
  # the Free Software Foundation; either version 2 of the License, or
 -- 
-2.16.1
+2.17.0
 
