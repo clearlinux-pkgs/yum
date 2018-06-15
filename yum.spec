@@ -4,7 +4,7 @@
 #
 Name     : yum
 Version  : 3.4.3
-Release  : 38
+Release  : 39
 URL      : http://yum.baseurl.org/download/3.4/yum-3.4.3.tar.gz
 Source0  : http://yum.baseurl.org/download/3.4/yum-3.4.3.tar.gz
 Summary  : RPM installer/updater
@@ -12,8 +12,9 @@ Group    : Development/Tools
 License  : GPL-2.0 GPL-2.0+
 Requires: yum-bin
 Requires: yum-data
+Requires: yum-license
 Requires: yum-locales
-Requires: yum-doc
+Requires: yum-man
 Requires: yum-python
 Requires: pycurl-legacypython
 Requires: pyliblzma-legacypython
@@ -21,7 +22,7 @@ Requires: python-rpm-legacypython
 Requires: yum-legacypython
 BuildRequires : gettext-bin
 BuildRequires : intltool
-
+BuildRequires : python-dev
 Patch1: cve-2014-0022.nopatch
 Patch2: 0001-Improve-yum-performance-in-Clear.patch
 Patch3: 0002-No-lock.patch
@@ -36,6 +37,8 @@ automatically, prompting the user for permission as necessary.
 Summary: bin components for the yum package.
 Group: Binaries
 Requires: yum-data
+Requires: yum-license
+Requires: yum-man
 
 %description bin
 bin components for the yum package.
@@ -49,14 +52,6 @@ Group: Data
 data components for the yum package.
 
 
-%package doc
-Summary: doc components for the yum package.
-Group: Documentation
-
-%description doc
-doc components for the yum package.
-
-
 %package legacypython
 Summary: legacypython components for the yum package.
 Group: Default
@@ -66,12 +61,28 @@ Requires: python-core
 legacypython components for the yum package.
 
 
+%package license
+Summary: license components for the yum package.
+Group: Default
+
+%description license
+license components for the yum package.
+
+
 %package locales
 Summary: locales components for the yum package.
 Group: Default
 
 %description locales
 locales components for the yum package.
+
+
+%package man
+Summary: man components for the yum package.
+Group: Default
+
+%description man
+man components for the yum package.
 
 
 %package python
@@ -93,7 +104,7 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C
-export SOURCE_DATE_EPOCH=1528830382
+export SOURCE_DATE_EPOCH=1529093448
 export CFLAGS="$CFLAGS -fstack-protector-strong -mzero-caller-saved-regs=used "
 export FCFLAGS="$CFLAGS -fstack-protector-strong -mzero-caller-saved-regs=used "
 export FFLAGS="$CFLAGS -fstack-protector-strong -mzero-caller-saved-regs=used "
@@ -101,8 +112,10 @@ export CXXFLAGS="$CXXFLAGS -fstack-protector-strong -mzero-caller-saved-regs=use
 make  %{?_smp_mflags} DESTDIR=%{buildroot}
 
 %install
-export SOURCE_DATE_EPOCH=1528830382
+export SOURCE_DATE_EPOCH=1529093448
 rm -rf %{buildroot}
+mkdir -p %{buildroot}/usr/share/doc/yum
+cp COPYING %{buildroot}/usr/share/doc/yum/COPYING
 %make_install
 %find_lang yum
 ## make_install_append content
@@ -148,14 +161,21 @@ rm -rf %{buildroot}%{_sysconfdir}/yum
 /usr/share/yum-cli/yumupd.py
 /usr/share/yum-cli/yumupd.pyc
 
-%files doc
-%defattr(0644,root,root,0755)
-%doc /usr/share/man/man5/*
-%doc /usr/share/man/man8/*
-
 %files legacypython
 %defattr(-,root,root,-)
 /usr/lib/python2*/*
+
+%files license
+%defattr(-,root,root,-)
+/usr/share/doc/yum/COPYING
+
+%files man
+%defattr(-,root,root,-)
+/usr/share/man/man5/yum-updatesd.conf.5
+/usr/share/man/man5/yum.conf.5
+/usr/share/man/man8/yum-shell.8
+/usr/share/man/man8/yum-updatesd.8
+/usr/share/man/man8/yum.8
 
 %files python
 %defattr(-,root,root,-)
