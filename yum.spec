@@ -21,7 +21,7 @@ Requires: python-rpm-legacypython
 Requires: yum-legacypython
 BuildRequires : gettext-bin
 BuildRequires : intltool
-BuildRequires : python-dev
+
 Patch1: cve-2014-0022.nopatch
 Patch2: 0001-Improve-yum-performance-in-Clear.patch
 Patch3: 0002-No-lock.patch
