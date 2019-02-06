@@ -4,18 +4,18 @@
 #
 Name     : yum
 Version  : 3.4.3
-Release  : 40
+Release  : 41
 URL      : http://yum.baseurl.org/download/3.4/yum-3.4.3.tar.gz
 Source0  : http://yum.baseurl.org/download/3.4/yum-3.4.3.tar.gz
-Summary  : RPM installer/updater
+Summary  : a popular channel based package manager for RPM distros.
 Group    : Development/Tools
 License  : GPL-2.0 GPL-2.0+
-Requires: yum-bin
-Requires: yum-data
-Requires: yum-license
-Requires: yum-locales
-Requires: yum-man
-Requires: yum-python
+Requires: yum-bin = %{version}-%{release}
+Requires: yum-data = %{version}-%{release}
+Requires: yum-license = %{version}-%{release}
+Requires: yum-locales = %{version}-%{release}
+Requires: yum-man = %{version}-%{release}
+Requires: yum-python = %{version}-%{release}
 Requires: pycurl-legacypython
 Requires: pyliblzma-legacypython
 Requires: python-rpm-legacypython
@@ -27,6 +27,7 @@ Patch1: cve-2014-0022.nopatch
 Patch2: 0001-Improve-yum-performance-in-Clear.patch
 Patch3: 0002-No-lock.patch
 Patch4: 0003-Force-usr-bin-python2.patch
+Patch5: shaddup.patch
 
 %description
 Yum is a utility that can check for and automatically download and
@@ -36,9 +37,9 @@ automatically, prompting the user for permission as necessary.
 %package bin
 Summary: bin components for the yum package.
 Group: Binaries
-Requires: yum-data
-Requires: yum-license
-Requires: yum-man
+Requires: yum-data = %{version}-%{release}
+Requires: yum-license = %{version}-%{release}
+Requires: yum-man = %{version}-%{release}
 
 %description bin
 bin components for the yum package.
@@ -98,39 +99,38 @@ python components for the yum package.
 %patch2 -p1
 %patch3 -p1
 %patch4 -p1
+%patch5 -p1
 
 %build
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C
-export SOURCE_DATE_EPOCH=1529093448
+export SOURCE_DATE_EPOCH=1549469023
 export CFLAGS="$CFLAGS -fstack-protector-strong -mzero-caller-saved-regs=used "
 export FCFLAGS="$CFLAGS -fstack-protector-strong -mzero-caller-saved-regs=used "
 export FFLAGS="$CFLAGS -fstack-protector-strong -mzero-caller-saved-regs=used "
 export CXXFLAGS="$CXXFLAGS -fstack-protector-strong -mzero-caller-saved-regs=used "
 make  %{?_smp_mflags} DESTDIR=%{buildroot}
 
+
 %install
-export SOURCE_DATE_EPOCH=1529093448
+export SOURCE_DATE_EPOCH=1549469023
 rm -rf %{buildroot}
-mkdir -p %{buildroot}/usr/share/doc/yum
-cp COPYING %{buildroot}/usr/share/doc/yum/COPYING
+mkdir -p %{buildroot}/usr/share/package-licenses/yum
+cp COPYING %{buildroot}/usr/share/package-licenses/yum/COPYING
 %make_install
 %find_lang yum
-## make_install_append content
-rm -rf %{buildroot}%{_sysconfdir}/rc.d
-mkdir -p %{buildroot}%{_datadir}/dbus-1/system.d
-mv %{buildroot}%{_sysconfdir}/dbus-1/system.d/yum-updatesd.conf %{buildroot}%{_datadir}/dbus-1/system.d
-rm -rf %{buildroot}%{_sysconfdir}/dbus-1/
-rm -rf %{buildroot}%{_sysconfdir}/cron.daily
-rm -rf %{buildroot}%{_sysconfdir}/sysconfig
-rm -rf %{buildroot}%{_sysconfdir}/logrotate.d
-mkdir -p %{buildroot}%{_datadir}/bash-completion/completions/
-mv %{buildroot}%{_sysconfdir}/bash_completion.d/yum.bash %{buildroot}%{_datadir}/bash-completion/completions/yum
-rm -rf %{buildroot}%{_sysconfdir}/bash_completion.d
-rm -rf %{buildroot}%{_sysconfdir}/yum
-## make_install_append end
+## install_append content
+rm -rf %{buildroot}/etc/rc.d
+rm -rf %{buildroot}/etc/cron.daily
+rm -rf %{buildroot}/etc/sysconfig
+rm -rf %{buildroot}/etc/logrotate.d
+mkdir -p %{buildroot}/usr/share/bash-completion/completions/
+mv %{buildroot}/etc/bash_completion.d/yum.bash %{buildroot}/usr/share/bash-completion/completions/yum
+rm -rf %{buildroot}/etc/bash_completion.d
+rm -rf %{buildroot}/etc/yum
+## install_append end
 
 %files
 %defattr(-,root,root,-)
@@ -166,11 +166,11 @@ rm -rf %{buildroot}%{_sysconfdir}/yum
 /usr/lib/python2*/*
 
 %files license
-%defattr(-,root,root,-)
-/usr/share/doc/yum/COPYING
+%defattr(0644,root,root,0755)
+/usr/share/package-licenses/yum/COPYING
 
 %files man
-%defattr(-,root,root,-)
+%defattr(0644,root,root,0755)
 /usr/share/man/man5/yum-updatesd.conf.5
 /usr/share/man/man5/yum.conf.5
 /usr/share/man/man8/yum-shell.8

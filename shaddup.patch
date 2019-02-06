@@ -1,0 +1,11 @@
+--- yum-3.4.3/cli.py~	2011-06-28 20:27:22.000000000 +0000
++++ yum-3.4.3/cli.py	2019-02-06 15:48:48.127721731 +0000
+@@ -1424,8 +1424,6 @@
+         # ones that we obviously can't use
+         
+         if self.rpmdb.contains(po=pkg):
+-            self.verbose_logger.log(yum.logginglevels.DEBUG_3,
+-                _('Package %s is already installed, skipping'), pkg)
+             return False
+         
+         # everything installed that matches the name

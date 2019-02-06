@@ -2,3 +2,4 @@ cve-2014-0022.nopatch
 0001-Improve-yum-performance-in-Clear.patch
 0002-No-lock.patch
 0003-Force-usr-bin-python2.patch
+shaddup.patch
