@@ -4,7 +4,7 @@
 #
 Name     : yum
 Version  : 3.4.3
-Release  : 42
+Release  : 43
 URL      : http://yum.baseurl.org/download/3.4/yum-3.4.3.tar.gz
 Source0  : http://yum.baseurl.org/download/3.4/yum-3.4.3.tar.gz
 Summary  : a popular channel based package manager for RPM distros.
@@ -16,7 +16,7 @@ Requires: yum-license = %{version}-%{release}
 Requires: yum-locales = %{version}-%{release}
 Requires: yum-man = %{version}-%{release}
 Requires: yum-python = %{version}-%{release}
-Requires: pycurl-legacypython
+Requires: deprecated-pycurl-legacypython
 Requires: pyliblzma-legacypython
 Requires: python-rpm-legacypython
 Requires: yum-legacypython
@@ -39,7 +39,6 @@ Summary: bin components for the yum package.
 Group: Binaries
 Requires: yum-data = %{version}-%{release}
 Requires: yum-license = %{version}-%{release}
-Requires: yum-man = %{version}-%{release}
 
 %description bin
 bin components for the yum package.
@@ -106,7 +105,7 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C
-export SOURCE_DATE_EPOCH=1549469023
+export SOURCE_DATE_EPOCH=1554343260
 export CFLAGS="$CFLAGS -fstack-protector-strong -mzero-caller-saved-regs=used "
 export FCFLAGS="$CFLAGS -fstack-protector-strong -mzero-caller-saved-regs=used "
 export FFLAGS="$CFLAGS -fstack-protector-strong -mzero-caller-saved-regs=used "
@@ -115,7 +114,7 @@ make  %{?_smp_mflags} DESTDIR=%{buildroot}
 
 
 %install
-export SOURCE_DATE_EPOCH=1549469023
+export SOURCE_DATE_EPOCH=1554343260
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/yum
 cp COPYING %{buildroot}/usr/share/package-licenses/yum/COPYING
